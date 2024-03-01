@@ -1,0 +1,43 @@
+CREATE TABLE E_teacher (
+    id VARCHAR(2) PRIMARY KEY,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(25) NOT NULL,
+    department VARCHAR(30) NOT NULL,
+    subject VARCHAR(20) NOT NULL,
+    password VARCHAR(8) NOT NULL,
+);
+
+CREATE TABLE E_student(
+  roll_no INT(4) PRIMARY KEY,
+   s_first_name VARCHAR(20) NOT NULL,
+  s_last_name VARCHAR(25) NOT NULL,
+  s_department VARCHAR(30) NOT NULL,
+  `class` VARCHAR(5) NOT NULL,
+  s_password VARCHAR(8) NOT NULL,
+  s_user_name VARCHAR(12) NOT NULL
+);
+
+CREATE TABLE E_EXAMS(
+  exam_id INT(3) PRIMARY KEY,
+  Exam_name VARCHAR(20) NOT NULL,
+  Dept VARCHAR(30) NOT NULL,
+  E_credits INT(2) NOT NULL,
+  E_marks INT(2) NOT NULL,
+  E_status VARCHAR(15),
+  E_date DATE NOT NULL
+);
+
+CREATE TABLE result (
+    roll_no INT,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    Department VARCHAR(30),
+    subject VARCHAR(20),
+    credits INT(2),
+    TotalMarks INT(100),
+    Marks_obt INT(100)
+);
+
+
+
+
