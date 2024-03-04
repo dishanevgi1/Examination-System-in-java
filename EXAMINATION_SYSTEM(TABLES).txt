@@ -1,6 +1,6 @@
 CREATE TABLE E_teacher (
     id VARCHAR(2) PRIMARY KEY,
-    first_name VARCHAR(20) NOT NULL,
+    first_name VARCHAR(25) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
     department VARCHAR(30) NOT NULL,
     subject VARCHAR(30) NOT NULL,
@@ -18,24 +18,24 @@ VALUES
 
 CREATE TABLE E_student(
   roll_no INT(4) PRIMARY KEY,
-   s_first_name VARCHAR(20) NOT NULL,
+   s_first_name VARCHAR(25) NOT NULL,
   s_last_name VARCHAR(25) NOT NULL,
   s_department VARCHAR(30) NOT NULL,
   `class` VARCHAR(5) NOT NULL,
-  s_password VARCHAR(25) NOT NULL,
-  s_user_name VARCHAR(25) NOT NULL
+  s_user_name VARCHAR(25) NOT NULL,
+  s_password VARCHAR(20) NOT NULL
 );
 
 
 
-INSERT INTO E_student (roll_no, s_first_name, s_last_name, s_department, `class`, s_password, s_user_name)
+INSERT INTO E_student (roll_no, s_first_name, s_last_name, s_department, `class`, s_user_name, s_password)
 VALUES 
-(4001, 'Aarav', 'Patel', 'Computer Science', 'FYBSC', 'Student@1', 'aarav_student'),
-(4002, 'Niharika', 'Reddy', 'Computer Science', 'SYBSC', 'Student@2', 'niharika_student'),
-(4003, 'Siddharth', 'Mehra', 'Computer Science', 'FYBSC', 'Student@3', 'sid_student'),
-(4004, 'Ananya', 'Singh', 'Computer Science', 'FYBSC', 'Student@4', 'ananya_student'),
-(4005, 'Rohan', 'Kapoor', 'Computer Science', 'SYBSC', 'Student@5', 'rohan_student'),
-(4006, 'Aayush', 'Mehra', 'Mass Media', 'SYBMM', 'Student@6', 'aayush_student');
+(4001, 'Aarav', 'Patel', 'Computer Science', 'FYBSC','aarav_student', 'Student@1'), 
+(4002, 'Niharika', 'Reddy', 'Computer Science', 'SYBSC','niharika_student', 'Student@2'),
+(4003, 'Siddharth', 'Mehra', 'Computer Science', 'FYBSC','sid_student', 'Student@3'),
+(4004, 'Ananya', 'Singh', 'Computer Science', 'FYBSC','ananya_student', 'Student@4'),
+(4005, 'Rohan', 'Kapoor', 'Computer Science', 'SYBSC','rohan_student', 'Student@5'),
+(4006, 'Aayush', 'Mehra', 'Mass Media', 'SYBMM','aayush_student', 'Student@6');
 
 
 CREATE TABLE E_EXAMS(
@@ -43,8 +43,8 @@ CREATE TABLE E_EXAMS(
   Exam_name VARCHAR(20) NOT NULL,
   Dept VARCHAR(30) NOT NULL,
   E_credits INT(2) NOT NULL,
-  E_marks INT(2) NOT NULL,
-  E_status VARCHAR(15),
+  E_marks INT(3) NOT NULL,
+  E_status VARCHAR(10),
   E_date DATE NOT NULL
 );
 
@@ -58,14 +58,14 @@ VALUES
 
 
 CREATE TABLE result (
-    roll_no INT(4) PRIMARY KEY,
-    first_name VARCHAR(20),
-    last_name VARCHAR(25),
-    Department VARCHAR(30),
-    subject VARCHAR(25),
-    credits INT(2),
-    TotalMarks INT(3),
-    Marks_obt INT(3)
+    roll_no INT(4) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(25) NOT NULL,
+    Department VARCHAR(30) NOT NULL,
+    subject VARCHAR(25) NOT NULL,
+    credits INT(2) NOT NULL,
+    TotalMarks INT(3) NOT NULL,
+    Marks_obt INT(3) NOT NULL
 );
 
 INSERT INTO result (roll_no, first_name, last_name, Department, subject, credits, TotalMarks, Marks_obt)
