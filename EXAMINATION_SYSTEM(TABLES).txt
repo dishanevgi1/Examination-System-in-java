@@ -3,9 +3,18 @@ CREATE TABLE E_teacher (
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
     department VARCHAR(30) NOT NULL,
-    subject VARCHAR(20) NOT NULL,
-    password VARCHAR(8) NOT NULL,
+    subject VARCHAR(30) NOT NULL,
+    password VARCHAR(25) NOT NULL
 );
+
+INSERT INTO E_teacher (id, first_name, last_name, department, subject, password)
+VALUES 
+('C1', 'Meera', 'Deshpande', 'Computer Science', 'Computer Architecture', 'Teacher@123'),
+('C2', 'Rajesh', 'Sharma', 'Computer Science', 'Python', 'Teacher@456'),
+('C3', 'Priya', 'Kapoor', 'Computer Science', 'Java', 'Teacher@789'),
+('C4', 'Arjun', 'Singhania', 'Computer Science', 'Html', 'Teacher@895'),
+('C5', 'Nandini', 'Iyer', 'Computer Science', 'DSA', 'Teacher@632');
+
 
 CREATE TABLE E_student(
   roll_no INT(4) PRIMARY KEY,
@@ -13,9 +22,21 @@ CREATE TABLE E_student(
   s_last_name VARCHAR(25) NOT NULL,
   s_department VARCHAR(30) NOT NULL,
   `class` VARCHAR(5) NOT NULL,
-  s_password VARCHAR(8) NOT NULL,
-  s_user_name VARCHAR(12) NOT NULL
+  s_password VARCHAR(25) NOT NULL,
+  s_user_name VARCHAR(25) NOT NULL
 );
+
+
+
+INSERT INTO E_student (roll_no, s_first_name, s_last_name, s_department, `class`, s_password, s_user_name)
+VALUES 
+(4001, 'Aarav', 'Patel', 'Computer Science', 'FYBSC', 'Student@1', 'aarav_student'),
+(4002, 'Niharika', 'Reddy', 'Computer Science', 'SYBSC', 'Student@2', 'niharika_student'),
+(4003, 'Siddharth', 'Mehra', 'Computer Science', 'FYBSC', 'Student@3', 'sid_student'),
+(4004, 'Ananya', 'Singh', 'Computer Science', 'FYBSC', 'Student@4', 'ananya_student'),
+(4005, 'Rohan', 'Kapoor', 'Computer Science', 'SYBSC', 'Student@5', 'rohan_student'),
+(4006, 'Aayush', 'Mehra', 'Mass Media', 'SYBMM', 'Student@6', 'aayush_student');
+
 
 CREATE TABLE E_EXAMS(
   exam_id INT(3) PRIMARY KEY,
@@ -27,16 +48,61 @@ CREATE TABLE E_EXAMS(
   E_date DATE NOT NULL
 );
 
+INSERT INTO E_EXAMS (exam_id, Exam_name, Dept, E_credits, E_marks, E_status, E_date)
+VALUES 
+(001, 'COA', 'Computer Science', 4, 100, 'Upcoming', '2024-03-15'),
+(002, 'Python', 'Computer Science', 6, 80, 'conducted', '2024-05-20'),
+(003, 'Java', 'Computer Science', 2, 50, 'conducted', '2024-02-10'),
+(004, 'HTML', 'Computer Science', 3, 75, 'Upcoming', '2024-04-05'),
+(005, 'DSA', 'Computer Science', 5, 120, 'Upcoming', '2024-03-30');
+
+
 CREATE TABLE result (
-    roll_no INT,
+    roll_no INT(4) PRIMARY KEY,
     first_name VARCHAR(20),
     last_name VARCHAR(25),
     Department VARCHAR(30),
-    subject VARCHAR(20),
+    subject VARCHAR(25),
     credits INT(2),
-    TotalMarks INT(100),
-    Marks_obt INT(100)
+    TotalMarks INT(3),
+    Marks_obt INT(3)
 );
+
+INSERT INTO result (roll_no, first_name, last_name, Department, subject, credits, TotalMarks, Marks_obt)
+VALUES 
+(4001, 'Aarav', 'Patel', 'Computer Science', 'COA', 4, 100, 75),
+(4001, 'Aarav', 'Patel','Computer Science', 'Python', 6, 80, 75),
+(4001,'Aarav', 'Patel', 'Computer Science', 'Java', 2, 50, 40),
+(4001, 'Aarav', 'Patel','Computer Science', 'Html', 3, 75, 65),
+(4001, 'Aarav', 'Patel', 'Computer Science', 'Dsa', 5, 120, 110),
+
+(4002, 'Niharika', 'Reddy',  'Computer Science', 'COA', 4, 100, 65),
+(4002, 'Niharika', 'Reddy', 'Computer Science', 'Python', 6, 80, 55),
+(4002, 'Niharika', 'Reddy',  'Computer Science', 'Java', 2, 50, 45),
+(4002,'Niharika', 'Reddy',  'Computer Science', 'Html', 3, 75, 55),
+(4002,'Niharika', 'Reddy', 'Computer Science', 'Dsa', 5, 120, 100),
+
+(4003,'Siddharth', 'Mehra','Computer Science', 'COA', 4, 100, 85),
+(4003, 'Siddharth', 'Mehra', 'Computer Science', 'Python', 6, 80, 50),
+(4003,'Siddharth', 'Mehra','Computer Science', 'Java', 2, 50, 40),
+(4003,'Siddharth', 'Mehra','Computer Science', 'Html', 3, 75, 59),
+(4003,'Siddharth', 'Mehra','Computer Science', 'Dsa', 5, 120, 111),
+
+(4004, 'Ananya', 'Singh', 'Computer Science', 'COA', 4, 100, 90),
+(4004, 'Ananya', 'Singh', 'Computer Science', 'Python', 6, 80, 75),
+(4004, 'Ananya', 'Singh', 'Computer Science', 'Java', 2, 50, 35),
+(4004, 'Ananya', 'Singh','Computer Science', 'Html', 3, 75, 74),
+(4004, 'Ananya', 'Singh', 'Computer Science', 'Dsa', 5, 120, 108),
+
+(4005, 'Rohan', 'Kapoor', 'Computer Science', 'COA', 4, 100, 69),
+(4005, 'Rohan', 'Kapoor', 'Computer Science', 'Python', 6, 80, 79),
+(4005, 'Rohan', 'Kapoor','Computer Science', 'Java', 2, 50, 50),
+(4005, 'Rohan', 'Kapoor', 'Computer Science', 'Html', 3, 75, 75),
+(4005, 'Rohan', 'Kapoor', 'Computer Science', 'Dsa', 5, 120, 120);
+
+
+
+
 
 
 
