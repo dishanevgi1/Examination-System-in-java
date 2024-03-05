@@ -53,7 +53,7 @@ class Student {
             }
 
             //password
-            System.out.print("Create your password (should include at least 8 characters long, and atleast  one uppercase letter, one lowercase letter, one number, and one '_' or '@' symbol): ");
+            System.out.print("Create your password ( at least 8 characters long, and atleast one uppercase letter,  lowercase letter,  digits , and a  '_' or '@' symbol): ");
             //to check if the password entered is valid or not
             while (true) {
                 password = scanner.nextLine();
@@ -163,27 +163,32 @@ class Student {
         }
     }
 
-    public void display_examSchedule(Connection connection,String username) throws SQLException{
-        String query = "SELECT Exam_name,E_credits,E_marks,E_status,E_date FROM E_EXAMS WHERE Dept = (SELECT s_department FROM E_student WHERE s_user_name = ?)";
+    public void display_examSchedule(Connection connection, String username) throws SQLException {
+        String query = "SELECT Exam_name, E_credits, E_marks, E_status, E_date FROM E_EXAMS WHERE Dept = (SELECT s_department FROM E_student WHERE s_user_name = ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
+
         System.out.println("=================================================================================================================================================");
         System.out.println("                                                              **EXAM SCHEDULE**");
         System.out.println("=================================================================================================================================================");
         System.out.println(" ");
-        System.out.println("+-------------------+----------+-----------------+---------------+--------+");
-        System.out.println("|Exam Name\t\t|CREDITS\t|Total Marks\t|STATUS\t\t|DATE\t\t|");
-        System.out.println("+---------------+----------+-----------------+---------------+-------------+");
+
+        System.out.printf("+-------------------+----------+-----------------+---------------+---------------+%n");
+        System.out.printf("| Exam Name         | CREDITS  | Total Marks     | STATUS        | DATE          |%n");
+        System.out.printf("+-------------------+----------+-----------------+---------------+---------------+%n");
+
         while (resultSet.next()) {
             String examName = resultSet.getString("Exam_name");
-            int Credits = resultSet.getInt("E_credits");
-            int Marks= resultSet.getInt("E_marks");
-            String status=resultSet.getString("E_status");
-            String date =resultSet.getString("E_date");
-            System.out.println("|"+examName+"\t \t\t|"+Credits+"\t\t |"+Marks+"\t\t   |"+status+"\t\t  |"+date+"\t\t|");
-            System.out.println("+----------------------------+---------------+---------------------+-----------------------+");
+            int credits = resultSet.getInt("E_credits");
+            int marks = resultSet.getInt("E_marks");
+            String status = resultSet.getString("E_status");
+            String date = resultSet.getString("E_date");
+
+            System.out.printf("| %-17s | %-8d | %-15d | %-13s | %-13s |%n", examName, credits, marks, status, date);
         }
+
+        System.out.printf("+-------------------+----------+-----------------+---------------+---------------+%n");
     }
 
     public void display_result(Connection connection,String username) throws SQLException{
@@ -402,8 +407,6 @@ class Teacher  {
                 System.out.println(" ");
                 teacher1.display_examSchedule(connection, ID);//calling method to display exam_schedule
                 System.out.println(" ");
-                System.out.println(" ");
-                System.out.println(" ");
                 // to insert the student's result
                 while (true) {
                     System.out.print("Do you want to add the student's result(yes/no)? ");
@@ -450,24 +453,38 @@ class Teacher  {
         }
     }
 
-    public void display_examSchedule(Connection connection,String ID) throws SQLException{
+    public void display_examSchedule(Connection connection, String ID) throws SQLException {
         Teacher teacher1 = new Teacher();
         String examName;
         int Credits;
         int Marks;
         String status;
         String date;
-        String query = "SELECT Exam_name,E_credits,E_marks,E_status,E_date FROM E_EXAMS WHERE dept = (SELECT department FROM E_teacher WHERE id = ?)";
+        String query = "SELECT Exam_name, E_credits, E_marks, E_status, E_date FROM E_EXAMS WHERE dept = (SELECT department FROM E_teacher WHERE id = ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, ID);
         ResultSet resultSet = preparedStatement.executeQuery();
+
         System.out.println("=================================================================================================================================================");
         System.out.println("                                                              **EXAM SCHEDULE**");
         System.out.println("=================================================================================================================================================");
         System.out.println(" ");
-        System.out.println("+---------------+----------+-----------------+---------------+--------+");
-        System.out.println("|Exam Name\t \t |CREDITS\t |Total Marks \t|STATUS \t\t|DATE\t\t|");
-        System.out.println("+---------------+----------+-----------------+---------------+-------------+");
+
+        System.out.printf("+----------------------+----------+-----------------+---------------+-------------+%n");
+        System.out.printf("| Exam Name            | CREDITS  | Total Marks     | STATUS        | DATE        |%n");
+        System.out.printf("+----------------------+----------+-----------------+---------------+-------------+%n");
+
+        while (resultSet.next()) {
+            examName = resultSet.getString("Exam_name");
+            Credits = resultSet.getInt("E_credits");
+            Marks = resultSet.getInt("E_marks");
+            status = resultSet.getString("E_status");
+            date = resultSet.getString("E_date");
+
+            System.out.printf("| %-20s | %-8d | %-15d | %-13s | %-11s |%n", examName, Credits, Marks, status, date);
+            System.out.printf("+----------------------+----------+-----------------+---------------+-------------+%n");
+        }
+        //to add new exam schedule
         while (resultSet.next()) {
             examName = resultSet.getString("Exam_name");
             Credits = resultSet.getInt("E_credits");
