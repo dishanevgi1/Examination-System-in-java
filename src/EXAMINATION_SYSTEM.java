@@ -94,7 +94,8 @@ class Student {
 
     //method for student login and check if the username is already registered or not
     public void student_login(Connection connection){
-        try{Student student1 = new Student();
+        try{
+            Student student1 = new Student();
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter your username : ");
             String username = scanner.nextLine();
@@ -191,31 +192,38 @@ class Student {
         System.out.printf("+-------------------+----------+-----------------+---------------+---------------+%n");
     }
 
-    public void display_result(Connection connection,String username) throws SQLException{
-        String sQuery="SELECT roll_no,first_name,last_name,Department,subject,credits,TotalMarks,Marks_obt FROM result where roll_no=(SELECT roll_no from E_student where s_user_name= ? )";
-        PreparedStatement preparedStatement=connection.prepareStatement(sQuery);
-        preparedStatement.setString(1,username);
-        ResultSet resultset= preparedStatement.executeQuery();
-        System.out.println("=================================================================================================================================================================================================================");
-        System.out.println("                                                                                                   **RESULT**                                                                         ");
-        System.out.println("==================================================================================================================================================================================================================");
+    public void display_result(Connection connection, String username) throws SQLException {
+        String sQuery = "SELECT roll_no, first_name, last_name, Department, subject, credits, TotalMarks, Marks_obt FROM result WHERE roll_no = (SELECT roll_no FROM E_student WHERE s_user_name = ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sQuery);
+        preparedStatement.setString(1, username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        System.out.println("=======================================================================================================================================================");
+        System.out.println("                                                                  **RESULT**");
+        System.out.println("=======================================================================================================================================================");
         System.out.println(" ");
-        System.out.println("+---------+------------------+--------------+------------------+---------------+---------+-----------+----------------------+");
-        System.out.println("|ROLL NO. |FIRST NAME\t\t |LAST_NAME\t\t |DEPARTMENT\t\t |SUBJECT\t\t |CREDITS\t|TOTAL MARKS\t|MARKS OBTAINED\t|");
-        System.out.println("+---------+------------------+--------------+------------------+---------------+---------+-----------+----------------------+");
-        while(resultset.next()){
-            int rollNo=resultset.getInt("roll_no");
-            String firstName= resultset.getString("first_name");
-            String lastName=resultset.getString("last_name");
-            String Dept=resultset.getString("Department");
-            String subject =resultset.getString("subject");
-            int credits=resultset.getInt("credits");
-            int TotalMarks=resultset.getInt("TotalMarks");
-            int Marks_obt=resultset.getInt("Marks_obt");
-            System.out.println("|"+rollNo+"\t\t|"+firstName+"\t\t|"+lastName+"|\t\t"+Dept+"\t\t|"+subject+" \t\t|"+credits+" \t\t|"+TotalMarks+" \t\t|"+Marks_obt+"\t\t|");
-            System.out.println("+-------------------------+--------------------------------+---------------------------------+-----------------------------------------+----------------------------------------------+------------------+-------------------+---------------+");
+
+        System.out.printf("+---------+------------------+--------------+------------------+---------------+---------+-----------+----------------------+%n");
+        System.out.printf("| ROLL NO.| FIRST NAME       | LAST NAME    | DEPARTMENT       | SUBJECT       | CREDITS | TOTAL MARKS| MARKS OBTAINED       |%n");
+        System.out.printf("+---------+------------------+--------------+------------------+---------------+---------+-----------+----------------------+%n");
+
+        while (resultSet.next()) {
+            int rollNo = resultSet.getInt("roll_no");
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String dept = resultSet.getString("Department");
+            String subject = resultSet.getString("subject");
+            int credits = resultSet.getInt("credits");
+            int totalMarks = resultSet.getInt("TotalMarks");
+            int marksObt = resultSet.getInt("Marks_obt");
+
+            System.out.printf("| %-8d| %-16s| %-13s| %-16s| %-14s| %-8d| %-10d| %-20d|%n", rollNo, firstName, lastName, dept, subject, credits, totalMarks, marksObt);
         }
+
+        System.out.printf("+---------+------------------+--------------+------------------+---------------+---------+-----------+----------------------+%n");
     }
+
+
 
     //method to check the validation of username
     private static boolean isValidUsername(String username) {
@@ -484,7 +492,7 @@ class Teacher  {
             System.out.printf("| %-20s | %-8d | %-15d | %-13s | %-11s |%n", examName, Credits, Marks, status, date);
             System.out.printf("+----------------------+----------+-----------------+---------------+-------------+%n");
         }
-        //to add new exam schedule
+
         while (resultSet.next()) {
             examName = resultSet.getString("Exam_name");
             Credits = resultSet.getInt("E_credits");
@@ -494,7 +502,7 @@ class Teacher  {
             System.out.println("|"+examName+"\t\t|"+Credits+"\t|"+Marks+"        \t |"+status+"\t\t|"+date+"\t\t|");
             System.out.println("+---------------------+-------------+------------+--------------+------------+");
         }
-    //to add new exam schedule
+        //to add new exam schedule
         Scanner scanner=new Scanner(System.in);
         String value = "yes";
         while(value == "yes") {
